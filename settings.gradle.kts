@@ -22,3 +22,8 @@ dependencyResolutionManagement {
 rootProject.name = "NewsSearchAppHomeTask3"
 include(":app")
 include(":newsapi")
+include(":database")
+include(":news-main")
+include(":news-data")
+include(":news-common")
+include(":news-uikit")
