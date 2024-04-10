@@ -9,5 +9,4 @@ plugins {
     alias(libs.plugins.dagger.hilt.android) apply false
     alias(libs.plugins.kapt) apply false
 
-
 }
