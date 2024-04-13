@@ -11,7 +11,6 @@ plugins {
     alias(libs.plugins.dagger.hilt.android) apply false
     alias(libs.plugins.kapt) apply false
     alias(libs.plugins.detekt) apply false
-
 }
 
 allprojects.onEach { project ->
@@ -26,9 +25,8 @@ allprojects.onEach { project ->
                     config.setFrom(rootProject.files("default-detekt-config.yml"))
                 }
                 project.dependencies.add("detektPlugins", libs.detekt.formatting.get().toString())
-
-
             }
         }
     }
 }
+

@@ -11,18 +11,20 @@ import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 import javax.inject.Provider
 
+@Suppress("ktlint:standard:annotation")
 @HiltViewModel
 internal class NewsMainVIewModel @Inject constructor(
-    getAllArticlesUseCase: Provider<GetAllArticlesUseCase>,
+    getAllArticlesUseCase: Provider<GetAllArticlesUseCase>
 ) : ViewModel() {
-    val state: StateFlow<State> = getAllArticlesUseCase.get().invoke(query = "android")
-        .map { it.toState() }
-        .stateIn(viewModelScope, SharingStarted.Lazily, State.None)
+    val state: StateFlow<State> =
+        @Suppress("ktlint:standard:multiline-expression-wrapping")
+        getAllArticlesUseCase.get().invoke(query = "android")
+            .map { it.toState() }
+            .stateIn(viewModelScope, SharingStarted.Lazily, State.None)
 
     fun forceUpdate() {
         TODO("Will not be implemented")
     }
-
 
     private fun RequestResult<List<ArticleUI>>.toState(): State {
         return when (this) {
@@ -31,14 +33,12 @@ internal class NewsMainVIewModel @Inject constructor(
             is RequestResult.Success -> State.Success(data)
         }
     }
-
 }
 
-
+@Suppress("ktlint:standard:blank-line-before-declaration")
 internal sealed class State(val articles: List<ArticleUI>?) {
     data object None : State(articles = null)
     class Loading(articles: List<ArticleUI>? = null) : State(articles)
     class Error(articles: List<ArticleUI>? = null) : State(articles)
     class Success(articles: List<ArticleUI>) : State(articles)
-
 }
